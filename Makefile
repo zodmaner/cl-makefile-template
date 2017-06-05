@@ -9,7 +9,7 @@
 
 SYSNAME = system-name
 TARGET = $(SYSNAME)
-EFUNCTION = $(SYSNAME):main
+ENTRYFUNC = $(SYSNAME):main
 
 all: $(TARGET)
 
@@ -17,12 +17,14 @@ $(TARGET): quicklisp-manifest.txt
 	buildapp --manifest-file quicklisp-manifest.txt \
 			 --compress-core \
 			 --load-system $(SYSNAME) \
-			 --entry $(EFUNCTION) \
+			 --asdf-path "./" \
+			 --entry $(ENTRYFUNC) \
 			 --output $(TARGET)
 
 quicklisp-manifest.txt:
 	sbcl --no-userinit --no-sysinit --non-interactive \
 		 --load ~/quicklisp/setup.lisp \
+		 --eval '(load "$(SYSNAME).asd")' \
 		 --eval '(ql:quickload "$(SYSNAME)")' \
 		 --eval '(ql:write-asdf-manifest-file "quicklisp-manifest.txt")'
 
