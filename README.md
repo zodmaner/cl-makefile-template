@@ -5,9 +5,8 @@ executable Common Lisp image.
 
 ## Dependencies
 
-* **SBCL**
-* **Quicklisp**
-* **buildapp**
+* [SBCL](http://www.sbcl.org)
+* [Quicklisp](https://www.quicklisp.org)
 
 ## Author & Maintainer
 
